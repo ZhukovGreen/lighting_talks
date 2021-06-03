@@ -1,0 +1,61 @@
+[tool.black]
+line-length=79
+target-version=["py38"]
+
+[tool.isort]
+line_length = 79
+use_parentheses = true
+balanced_wrapping = true
+include_trailing_comma = true
+multi_line_output = 3
+known_third_party=["pytest", "yarl", "aiohttp", "aioredis", "envparse"]
+known_first_party=["aiohttp_cache"]
+
+[tool.coverage.run]
+branch = true
+source = ["tests"]
+
+[tool.coverage.paths]
+source = ["tests/"]
+
+[tool.coverage.report]
+fail_under = 70 # TODO should be 95%
+skip_covered = true
+show_missing = true
+
+[tool.pytest.ini_options]
+minversion = "6.0.0"
+addopts = "-vv -s --no-cov-on-fail --tb=native"
+testpaths = "tests/"
+log_cli = true
+log_cli_level = "DEBUG"
+log_cli_format = "| %(asctime)s | %(process)d | %(name)s | %(levelname)s | %(filename)s | %(message)s"
+
+[tool.poetry]
+name = "python-typing"
+version = "0.1"
+description = "A cache system for aiohttp server"
+authors = ["zhukovgreen <iam@zhukovgreen.pro>"]
+readme = "README.md"
+license = "BSD"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+colorama = "^0.4.3"
+aiohttp = "^3.6.2"
+attrs = "^20.2.0"
+pydantic = "^1.6.1"
+
+
+[tool.poetry.dev-dependencies]
+coverage = {extras = ["toml"], version = "^5.0.3"}
+pytest = "^6.0.0"
+pytest-cov = "^2.8"
+pytest-asyncio = "^0.14.0"
+neovim = "^0.3.1"
+ipdb = "^0.13.3"
+
+
+[build-system]
+requires = ["poetry>=1.0.0."]
+build-backend = "poetry.masonry.api"
